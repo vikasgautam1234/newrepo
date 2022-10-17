@@ -40,4 +40,73 @@ router.get('/student-details/:name', function(req, res){
     res.send('Dummy response')
 })
 
+//problem 1.......................................................................................
+router.get("/movies",function(req,res){
+    const movies = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+    res.send(movies)
+})
+
+//problem 2.......................................................................................
+
+router.get("/movies/:indexNumber",function(req,res){
+    const movies1 = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"];
+    const call = req.params.indexNumber
+    // res.send(movies1[call])
+
+    // problem 3 : error handling for ques2 ......................................................
+    if(call>movies1.length){
+    // res.send("error:use a valid number")
+    }
+})
+ 
+//problem 4................................................................................
+
+router.get("/films",function(req,res){
+    const arrmovies = [ {
+        "id": 1,
+        "name": "The Shining"
+       }, {
+        "id": 2,
+        "name": "Incendies"
+       }, {
+        "id": 3,
+        "name": "Rang de Basanti"
+       }, {
+        "id": 4,
+        "name": "Finding Nemo"
+        
+       }]
+    //    res.send(arrmovies)
+       
+})
+// problem 5.....................................................................................
+
+router.get("/films/:filmId",function(req,res){
+    const movies = [{
+        "id": 1,
+        "name": "The Shining"
+       }, {
+        "id": 2,
+        "name": "Incendies"
+       }, {
+        "id": 3,
+        "name": "Rang de Basanti"
+       }, {
+        "id": 4,
+        "name": "Finding Nemo"
+        
+       }]
+
+       const count =0
+       for(i=0; i<movies.length; i++){
+        if(movies[i].id==Number(req.params.filmId)){
+            count++
+            res.send(movies[i])
+        }
+       }
+       if(count==0)
+        res.send("id is not matching")
+       
+})
+
 module.exports = router;
