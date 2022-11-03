@@ -10,7 +10,7 @@ const basicCode= async function(req, res, next) {
     next()
     }
 
-const createUser= async function (req, res) {
+const createUser2 = async function (req, res) {
     // Remember that inside request object we already know multiple attributes
     // Examples - body(req.body), query(req.query), params(req.params)
     let body = req.body
@@ -45,8 +45,8 @@ const dummyTwo = function (req, res) {
     else res.send("another example response")
 }
 
-module.exports.createUser= createUser
+module.exports.createUser1= createUser2
 module.exports.getUsersData= getUsersData
 module.exports.basicCode= basicCode
 module.exports.dummyOne = dummyOne
-module.exports.dummyTwo = dummyTwo
+module.exports.dummyTwo = dummyTwo 

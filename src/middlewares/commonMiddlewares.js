@@ -39,7 +39,42 @@ const myOtherMiddleware = function(req, res, next){
     }
     next()
 }
+//PROBLEM 2 HEADERVALIDATION-------------------------------------------------------------------------
+// const headerValidation = function(req,res,next){
+//    const checkHeader = req.headers["isfreeappuser"]
+// if(checkHeader){
+//     if(checkHeader=="true"){
+//         req.isfreeappuser=true
+//     }else{
+//         req.isfreeappuser=false
+//     }
+//     next();
+// }else{
+//     res.send({data:"header missing"})
+// }
+// }
 
+const letCheckIsFreeAppUser = async function(req,res,next){               
+   
+    let data=req.headers
+    let validinfo=data["isfreeappuser"]
+    if(validinfo){
+        if(validinfo=="true"){
+            req.isfreeappuser=true
+        }else{
+            req.isfreeappuser=false
+        }
+        next();
+    }else{
+        res.send({data:"header missing"})
+    }
+    }
+
+
+
+
+    module.exports.mid=letCheckIsFreeAppUser
+// module.exports.headerValidation = headerValidation
 module.exports.mid1= mid1
 module.exports.mid2= mid2
 module.exports.mid3= mid3
