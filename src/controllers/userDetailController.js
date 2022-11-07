@@ -11,12 +11,3 @@ let createUser = async (req, res) => {
  module.exports.createUser=createUser
 
 
-// const userDetail = async function(req,res){
-//     const detail = req.body
-//     const detailBody = await userDocModel.create(detail)
-//     res.send({send : detailBody})
-// }
-
-
-
-// module.exports.userDetail = userDetail

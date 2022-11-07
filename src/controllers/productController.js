@@ -8,10 +8,7 @@ let createProduct = async function (req, res) {
 
 module.exports.createProduct=createProduct;
 
-// const productDetail = async function(req,res){
-// const body = req.body
-// const data = await productModel.create(body)
-// res.send ({send : data})
-// }
 
-// module.exports.productDetail= productDetail
+
+
+

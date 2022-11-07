@@ -27,13 +27,10 @@ router.get("/dummy2", commonMW.myOtherMiddleware, UserController.dummyTwo)
 router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
 
-// router.post("/product-details",productController.productDetail)
-// router.post('/user-details', commonMW.headerValidation, userDocController.userDetail)
-// router.post('orderpurchase', commonMW.headerValidation, orderController.orderpurchase)
 
-router.post('/createUser',commonMW.mid,userDocController.createUser)
+router.post('/createUser',commonMW.mid, userDocController.createUser)   //commonMW.mid,
 router.post('/createProduct',productController.createProduct)
-router.post('/orderpurchase',commonMW.mid,orderController.orderpurchase)
+router.post('/orderpurchase',commonMW.mid,orderController.orderpurchase)  //
 
 
 module.exports = router;

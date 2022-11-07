@@ -1,23 +1,3 @@
-// const mongoose = require("mongoose")
-
-// const userDocSchema = new mongoose.Schema({
-//     name : String,
-//     balance : {
-//         type : Number,
-//         default : 100
-//     },
-//     address : String,
-//     age : Number,
-//     gender : {
-//         type : String,
-//         enum : ["male", "female", "other"]
-//     },
-//     isFreeAppUser : {
-//         type : Boolean,
-//         default : false
-//     }
-
-// })
 
 
 const mongoose = require('mongoose');
@@ -31,11 +11,19 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default:100
     },
-    address: String,
-    age: Number,
+    address: {
+        type : String,
+        required : true,
+    },
+    age: {
+       type : Number,
+       required : true,
+    },
     gender: {
-        tyep: String,
-        enum: ["male", "female", "other"]
+        type : String,
+        enum: ["male", "female", "other"],
+        required : true,
+        
     },
     isFreeAppUser:{
         type:Boolean,
@@ -43,6 +31,5 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema) //user
+module.exports = mongoose.model('User123', userSchema) //user
 
-// module.exports = mongoose.model("userDocModel",userDocSchema)

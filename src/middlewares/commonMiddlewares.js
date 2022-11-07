@@ -54,21 +54,38 @@ const myOtherMiddleware = function(req, res, next){
 // }
 // }
 
-const letCheckIsFreeAppUser = async function(req,res,next){               
+const letCheckIsFreeAppUser = async function(req,res,next){  
+
+    let isFreeAppUser = req.headers.isfreeappuser
+     if(!isFreeAppUser){
+        res.send("mandatory is not present ")
+     }
+     else{
+        isFreeAppUser = isFreeAppUser.toLowerCase()=== 'true'? true:false
+        req.isFreeAppUser = isFreeAppUser
+        next()
+     }
+    }
+
+
+
+
+
+         
    
-    let data=req.headers
-    let validinfo=data["isfreeappuser"]
-    if(validinfo){
-        if(validinfo=="true"){
-            req.isfreeappuser=true
-        }else{
-            req.isfreeappuser=false
-        }
-        next();
-    }else{
-        res.send({data:"header missing"})
-    }
-    }
+    // let data=req.headers
+    // let validinfo=data["isfreeappuser"]
+    // if(validinfo){
+    //     if(validinfo=="true"){
+    //         req.isfreeappuser=true
+    //     }else{
+    //         req.isfreeappuser=false
+    //     }
+    //     next();
+    // }else{
+    //     res.send({data:"header missing"})
+    // }
+    // }
 
 
 
