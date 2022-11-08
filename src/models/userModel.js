@@ -6,15 +6,26 @@ const userSchema = new mongoose.Schema( {
     mobile: {
         type: String,
 
-        required: true
+        // required: true
     },
-    emailId: String,
-    password: String,
+    emailId: {
+        type : String,
+        required : true
+    },
+        password:{
+            type : String,
+            required : true
+        },
+    
     gender: {
         type: String,
         enum: ["male", "female", "other"]
     },
+    isDeleted:{
+        type:Boolean,
+        default:false,
+    },
     age: Number,
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Userauthentication', userSchema)

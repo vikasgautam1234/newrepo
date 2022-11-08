@@ -44,13 +44,13 @@ const loginUser = async function (req, res) {
 };
 
 const getUserData = async function (req, res) {
-  let token = req.headers["x-Auth-token"];
-  if (!token) token = req.headers["x-auth-token"];
+  // let token = req.headers["x-Auth-token"];
+  // if (!token) token = req.headers["x-auth-token"];
 
-  //If no token is present in the request header return error. This means the user is not logged in.
-  if (!token) return res.send({ status: false, msg: "token must be present" });
+  // //If no token is present in the request header return error. This means the user is not logged in.
+  // if (!token) return res.send({ status: false, msg: "token must be present" });
 
-  console.log(token);
+  // console.log(token);
 
   // If a token is present then decode the token with verify function
   // verify takes two inputs:
@@ -61,9 +61,9 @@ const getUserData = async function (req, res) {
   // Decoding requires the secret again. 
   // A token can only be decoded successfully if the same secret was used to create(sign) that token.
   // And because this token is only known to the server, it can be assumed that if a token is decoded at server then this token must have been issued by the same server in past.
-  let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "token is invalid" });
+  // let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
+  // if (!decodedToken)
+  //   return res.send({ status: false, msg: "token is invalid" });
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
@@ -92,7 +92,21 @@ const updateUser = async function (req, res) {
   res.send({ status: updatedUser, data: updatedUser });
 };
 
+const deleteapi= async (req,res)=>{
+  let userId = req.params.userId;
+  let user = await userModel.findById(userId);
+  //Return an error if no user with the given id exists in the db
+  if (!user) {
+    return res.send("No such user exists");
+  }
+
+  let updatedUser = await userModel.findOneAndUpdate({ _id:userId},{$set:{isDeleted:true}},{new:true});
+  res.send({ status: updatedUser});
+};
+
+
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.deleteapi= deleteapi;
