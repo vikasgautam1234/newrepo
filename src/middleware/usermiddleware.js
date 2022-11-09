@@ -20,11 +20,16 @@ const mid1= async (req,res,next)=>{
   
 }
 const mid2=(req,res,next)=>{
+  try{
   let userId = req.params.userId;
   if(req.abc.userId==userId)
   next();
   else
   return res.send("not authorised")
+  }
+  catch(error){
+    res.status(500).send("somthing wrong in server")
+  }
 }
 
 

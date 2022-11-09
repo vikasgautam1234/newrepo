@@ -8,13 +8,19 @@ const createUser = async function (abcd, xyz) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
+  try{
   let data = abcd.body;
   let savedData = await userModel.create(data);
   console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
+  }
+  catch(error){
+    xyz.status(500).send("bad request please enter unquie value")
+   }
 };
 
 const loginUser = async function (req, res) {
+  try{
   let userName = req.body.emailId;
   let password = req.body.password;
 
@@ -41,9 +47,14 @@ const loginUser = async function (req, res) {
   );
   res.setHeader("x-auth-token", token);
   res.send({ status: true, token: token });
+  }
+  catch(error){
+    res.status(500).send("server problem")
+  }
 };
 
 const getUserData = async function (req, res) {
+  try{
   // let token = req.headers["x-Auth-token"];
   // if (!token) token = req.headers["x-auth-token"];
 
@@ -71,10 +82,15 @@ const getUserData = async function (req, res) {
     return res.send({ status: false, msg: "No such user exists" });
 
   res.send({ status: true, data: userDetails });
+  }
+  catch(err){
+    res.status(500).send("server error",err.messages)
+  }
   // Note: Try to see what happens if we change the secret while decoding the token
 };
 
 const updateUser = async function (req, res) {
+  try{
   // Do the same steps here:
   // Check if the token is present
   // Check if the token present is a valid token
@@ -90,9 +106,14 @@ const updateUser = async function (req, res) {
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
+}
+catch(err){
+  res.status(500).send("server error",err.message)
+}
 };
 
 const deleteapi= async (req,res)=>{
+  try{
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
   //Return an error if no user with the given id exists in the db
@@ -102,6 +123,10 @@ const deleteapi= async (req,res)=>{
 
   let updatedUser = await userModel.findOneAndUpdate({ _id:userId},{$set:{isDeleted:true}},{new:true});
   res.send({ status: updatedUser});
+}
+catch(err){
+  res.status(500).send("server error",err.message)
+}
 };
 
 
