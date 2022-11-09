@@ -19,4 +19,14 @@ const mid1= async (req,res,next)=>{
    
   
 }
+const mid2=(req,res,next)=>{
+  let userId = req.params.userId;
+  if(req.abc.userId==userId)
+  next();
+  else
+  return res.send("not authorised")
+}
+
+
 module.exports.mid1=mid1
+module.exports.mid2 = mid2
